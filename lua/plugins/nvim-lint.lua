@@ -33,9 +33,8 @@ return {
       vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
         group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
         callback = function()
-          -- Only try to lint when dianostics are enabled.
-          -- Note: the toggle diagnostics keymap is defined in keymaps.lua
-          if not vim.b.diagnostics_disabled then
+          -- Only try to lint when diagnostics are enabled for this buffer.
+          if vim.diagnostic.is_enabled({ bufnr = 0 }) then
             lint.try_lint()
           end
         end,

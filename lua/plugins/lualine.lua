@@ -2,10 +2,11 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
-        theme = "gruvbox-material",
+        theme = "catppuccin-macchiato",
         globalstatus = true, -- Force one statusline instead of one per window
         disabled_filetypes = {
           statusline = { "alpha", "dashboard", "NvimTree", "Outline" },

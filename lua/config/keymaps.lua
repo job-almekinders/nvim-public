@@ -1,18 +1,10 @@
 -- Toggle diagnostics for the current buffer
--- Note: vim.b.diagnostics_disabled is also used in nvim-lint.
 vim.keymap.set("n", "<leader>td", function()
   local bufnr = vim.api.nvim_get_current_buf()
-  local disabled = vim.b.diagnostics_disabled
+  local enabled = vim.diagnostic.is_enabled({ bufnr = bufnr })
 
-  if disabled then
-    vim.b.diagnostics_disabled = false
-    vim.diagnostic.enable(bufnr)
-    print("Diagnostics enabled")
-  else
-    vim.b.diagnostics_disabled = true
-    vim.diagnostic.disable(bufnr)
-    print("Diagnostics disabled")
-  end
+  vim.diagnostic.enable(not enabled, { bufnr = bufnr })
+  print(enabled and "Diagnostics disabled" or "Diagnostics enabled")
 end, { desc = "Toggle diagnostics for current buffer" })
 
 -- Yank all open buffers AND the directory tree into clipboard
